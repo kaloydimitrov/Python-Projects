@@ -9,49 +9,31 @@ def table():
     print(table_list[6] + "|" + table_list[7] + "|" + table_list[8])
 
 
-def check_if_o_win():
-    if table_list[0] == 'O' and table_list[4] == 'O' and table_list[8] == 'O':
-        return True
-    elif table_list[6] == 'O' and table_list[4] == 'O' and table_list[2] == 'O':
-        return True
-    elif table_list[0] == 'O' and table_list[3] == 'O' and table_list[6] == 'O':
-        return True
-    elif table_list[1] == 'O' and table_list[4] == 'O' and table_list[7] == 'O':
-        return True
-    elif table_list[2] == 'O' and table_list[5] == 'O' and table_list[8] == 'O':
-        return True
-    elif table_list[0] == 'O' and table_list[1] == 'O' and table_list[2] == 'O':
-        return True
-    elif table_list[3] == 'O' and table_list[4] == 'O' and table_list[5] == 'O':
-        return True
-    elif table_list[6] == 'O' and table_list[7] == 'O' and table_list[8] == 'O':
-        return True
-
-
-def check_if_x_win():
-    if table_list[0] == 'X' and table_list[4] == 'X' and table_list[8] == 'X':
-        return True
-    elif table_list[6] == 'X' and table_list[4] == 'X' and table_list[2] == 'X':
-        return True
-    elif table_list[0] == 'X' and table_list[3] == 'X' and table_list[6] == 'X':
-        return True
-    elif table_list[1] == 'X' and table_list[4] == 'X' and table_list[7] == 'X':
-        return True
-    elif table_list[2] == 'X' and table_list[5] == 'X' and table_list[8] == 'X':
-        return True
-    elif table_list[0] == 'X' and table_list[1] == 'X' and table_list[2] == 'X':
-        return True
-    elif table_list[3] == 'X' and table_list[4] == 'X' and table_list[5] == 'X':
-        return True
-    elif table_list[6] == 'X' and table_list[7] == 'X' and table_list[8] == 'X':
-        return True
+def check_if_win():
+    if table_list[0] != '-' and table_list[4] != '-' and table_list[8] != '-' and table_list[0] == table_list[4] and table_list[4] == table_list[8]:
+        return True, table_list[0]
+    elif table_list[6] != '-' and table_list[4] != '-' and table_list[2] != '-' and table_list[6] == table_list[4] and table_list[4] == table_list[2]:
+        return True, table_list[6]
+    elif table_list[0] != '-' and table_list[3] != '-' and table_list[6] != '-' and table_list[0] == table_list[3] and table_list[3] == table_list[4]:
+        return True, table_list[0]
+    elif table_list[1] != '-' and table_list[4] != '-' and table_list[7] != '-' and table_list[1] == table_list[4] and table_list[4] == table_list[7]:
+        return True, table_list[1]
+    elif table_list[2] != '-' and table_list[5] != '-' and table_list[8] != '-' and table_list[2] == table_list[5] and table_list[5] == table_list[8]:
+        return True, table_list[2]
+    elif table_list[0] != '-' and table_list[1] != '-' and table_list[2] != '-' and table_list[0] == table_list[1] and table_list[1] == table_list[2]:
+        return True, table_list[0]
+    elif table_list[3] != '-' and table_list[4] != '-' and table_list[5] != '-' and table_list[3] == table_list[4] and table_list[4] == table_list[5]:
+        return True, table_list[3]
+    elif table_list[6] != '-' and table_list[7] != '-' and table_list[8] != '-' and table_list[6] == table_list[7] and table_list[7] == table_list[8]:
+        return True, table_list[6]
 
 
 def game_over():
-    if check_if_o_win():
-        return True, "Player (O) wins the game!"
-    elif check_if_x_win():
-        return True, "Player (X) wins the game!"
+    if check_if_win():
+        if check_if_win()[1] == 'O':
+            return True, "Player (O) wins the game!"
+        elif check_if_win()[1] == 'X':
+            return True, "Player (X) wins the game!"
     elif "-" not in table_list:
         return True, "Match Draw!"
 
