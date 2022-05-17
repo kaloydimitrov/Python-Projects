@@ -10,21 +10,29 @@ def table():
 
 
 def check_if_win():
-    if table_list[0] != '-' and table_list[4] != '-' and table_list[8] != '-' and table_list[0] == table_list[4] and table_list[4] == table_list[8]:
+    if table_list[0] != '-' and table_list[4] != '-' and table_list[8] != '-' and table_list[0] == table_list[4] and \
+            table_list[4] == table_list[8]:
         return True, table_list[0]
-    elif table_list[6] != '-' and table_list[4] != '-' and table_list[2] != '-' and table_list[6] == table_list[4] and table_list[4] == table_list[2]:
+    elif table_list[6] != '-' and table_list[4] != '-' and table_list[2] != '-' and table_list[6] == table_list[4] and \
+            table_list[4] == table_list[2]:
         return True, table_list[6]
-    elif table_list[0] != '-' and table_list[3] != '-' and table_list[6] != '-' and table_list[0] == table_list[3] and table_list[3] == table_list[4]:
+    elif table_list[0] != '-' and table_list[3] != '-' and table_list[6] != '-' and table_list[0] == table_list[3] and \
+            table_list[3] == table_list[4]:
         return True, table_list[0]
-    elif table_list[1] != '-' and table_list[4] != '-' and table_list[7] != '-' and table_list[1] == table_list[4] and table_list[4] == table_list[7]:
+    elif table_list[1] != '-' and table_list[4] != '-' and table_list[7] != '-' and table_list[1] == table_list[4] and \
+            table_list[4] == table_list[7]:
         return True, table_list[1]
-    elif table_list[2] != '-' and table_list[5] != '-' and table_list[8] != '-' and table_list[2] == table_list[5] and table_list[5] == table_list[8]:
+    elif table_list[2] != '-' and table_list[5] != '-' and table_list[8] != '-' and table_list[2] == table_list[5] and \
+            table_list[5] == table_list[8]:
         return True, table_list[2]
-    elif table_list[0] != '-' and table_list[1] != '-' and table_list[2] != '-' and table_list[0] == table_list[1] and table_list[1] == table_list[2]:
+    elif table_list[0] != '-' and table_list[1] != '-' and table_list[2] != '-' and table_list[0] == table_list[1] and \
+            table_list[1] == table_list[2]:
         return True, table_list[0]
-    elif table_list[3] != '-' and table_list[4] != '-' and table_list[5] != '-' and table_list[3] == table_list[4] and table_list[4] == table_list[5]:
+    elif table_list[3] != '-' and table_list[4] != '-' and table_list[5] != '-' and table_list[3] == table_list[4] and \
+            table_list[4] == table_list[5]:
         return True, table_list[3]
-    elif table_list[6] != '-' and table_list[7] != '-' and table_list[8] != '-' and table_list[6] == table_list[7] and table_list[7] == table_list[8]:
+    elif table_list[6] != '-' and table_list[7] != '-' and table_list[8] != '-' and table_list[6] == table_list[7] and \
+            table_list[7] == table_list[8]:
         return True, table_list[6]
 
 
@@ -41,56 +49,27 @@ def game_over():
 one_to_nine = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
-def o_turn():
-    turn_o = input("Position 1-9 (O): ")
-
-    # checks for input problems
-    is_digit = turn_o.isnumeric()
+def input_checker(turn, x_or_o):
+    is_digit = turn.isnumeric()
     while not is_digit:
         print("Incorrect answer!")
-        turn_o = input("Position 1-9 (O): ")
-        is_digit = turn_o.isnumeric()
-    turn_o = int(turn_o) - 1
+        turn = input(f"Position 1-9 ({x_or_o}): ")
+        is_digit = turn.isnumeric()
+    turn = int(turn) - 1
 
-    while turn_o + 1 not in one_to_nine:
+    while turn + 1 not in one_to_nine:
         print("Incorrect answer!")
-        turn_o = int(input("Position 1-9 (O): ")) - 1
+        turn = int(input(f"Position 1-9 ({x_or_o}): ")) - 1
 
-    if table_list[turn_o] != '-':
+    if table_list[turn] != '-':
         while True:
             print("Incorrect answer!")
-            turn_o = int(input("Position 1-9 (O): ")) - 1
-            if table_list[turn_o] == '-':
-                table_list[turn_o] = 'O'
+            turn = int(input(f"Position 1-9 ({x_or_o}): ")) - 1
+            if table_list[turn] == '-':
+                table_list[turn] = f'{x_or_o}'
                 break
     else:
-        table_list[turn_o] = 'O'
-
-
-def x_turn():
-    turn_x = input("Position 1-9 (X): ")
-
-    # checks for input problems
-    is_digit = turn_x.isnumeric()
-    while not is_digit:
-        print("Incorrect answer!")
-        turn_x = input("Position 1-9 (X): ")
-        is_digit = turn_x.isnumeric()
-    turn_x = int(turn_x) - 1
-
-    while turn_x + 1 not in one_to_nine:
-        print("Incorrect answer!")
-        turn_x = int(input("Position 1-9 (X): ")) - 1
-
-    if table_list[turn_x] != '-':
-        while True:
-            print("Incorrect answer!")
-            turn_x = int(input("Position 1-9 (X): ")) - 1
-            if table_list[turn_x] == '-':
-                table_list[turn_x] = 'X'
-                break
-    else:
-        table_list[turn_x] = 'X'
+        table_list[turn] = f'{x_or_o}'
 
 
 table()
@@ -112,11 +91,13 @@ while True:
         elif answer == 'n':
             break
 
-    o_turn()
+    turn_o = input("Position 1-9 (O): ")
+    input_checker(turn_o, "O")
     table()
 
     if game_over():
         continue
 
-    x_turn()
+    turn_x = input("Position 1-9 (X): ")
+    input_checker(turn_x, "X")
     table()
