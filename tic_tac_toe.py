@@ -81,7 +81,7 @@ while True:
         print("Do you want to play a new game? (y/n)")
         answer = input()
 
-        while answer != 'y' and answer != 'n':
+        while answer not in ('y', 'n', 'Y', 'N'):
             print("Incorrect answer!")
             answer = input()
 
